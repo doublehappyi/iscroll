@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script type="text/javascript">
+        window.onload = function(){
+            var div = document.getElementById("progress");
+            function updateProgress(){
+                div.style.marginLeft = parseInt(div.style.marginLeft) + 5 + "px";
+                console.log(div.style.marginLeft);
+                if(parseInt(div.style.marginLeft) < 1000){
+                    setTimeout(updateProgress,17);
+                }
+            }
+            updateProgress();
+        }
+    </script>
+</head>
+<body>
+<div id="progress" style="background-color: darkgreen;height: 30px;width: 10px;margin-left: 1px;"></div>
+</body>
+</html>
