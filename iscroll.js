@@ -10,9 +10,12 @@
         };
 
     var utils = (function () {
+        //创建一个空对象作为容器，用来装方法
         var me = {};
 
+        //随便创建一个div，然后获取该div的style属性
         var _elementStyle = document.createElement('div').style;
+        //获取当前浏览器支持transform属性的前缀！
         var _vendor = (function () {
             var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
                 transform,
@@ -21,22 +24,32 @@
 
             for (; i < l; i++) {
                 transform = vendors[i] + 'ransform';
-                if (transform in _elementStyle) return vendors[i].substr(0, vendors[i].length - 1);
+                if (transform in _elementStyle)
+                    //substr和substring方法的区别
+                    //substr(startIndex,length)
+                    //substring(startIndex,endIndex);
+                    return vendors[i].substr(0, vendors[i].length - 1);
             }
 
             return false;
         })();
 
+        //加工函数：给样式添加浏览器特有的前缀
         function _prefixStyle(style) {
             if (_vendor === false) return false;
             if (_vendor === '') return style;
             return _vendor + style.charAt(0).toUpperCase() + style.substr(1);
         }
 
+        //Date.now方法是js第5版才有的方法
+        //兼容性：Feature	Chrome	Firefox (Gecko)	Internet Explorer	Opera	Safari
+        //Basic support	    5	    3	                9	            10.50	  4
+        //https://developer.mozilla.org/zh-CN/docs/JavaScript/Reference/Global_Objects/Date/now
         me.getTime = Date.now || function getTime() {
             return new Date().getTime();
         };
 
+        //简单的对象继承函数
         me.extend = function (target, obj) {
             for (var i in obj) {
                 target[i] = obj[i];
