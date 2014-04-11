@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>requesetAniamationFrame</title>
+    <script type="text/javascript">
+        var raf = requestAnimationFrame || webkitRequestAnimationFrame || mozRequestAnimationFrame || oRequestAnimationFrame;
+        window.onload = function(){
+            function updateProgress(){
+                var div = document.getElementById("requestAnimationFrame");
+                div.style.marginLeft = parseInt(div.style.marginLeft, 10) + 1 + "px";
+                if (parseInt(div.style.marginLeft) < 1000){
+                    raf(updateProgress);
+                }
+            }
+            raf(updateProgress);
+        }
+    </script>
+</head>
+<body>
+<div id="requestAnimationFrame" style="background-color: cadetblue;height: 30px;width: 30px;margin-left: 1px;"></div>
+</body>
+</html>
